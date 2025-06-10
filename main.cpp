@@ -4,6 +4,7 @@
 
 #include "CalcError.h"
 
+#include <algorithm>
 #include <unordered_map>
 #include <vector>
 

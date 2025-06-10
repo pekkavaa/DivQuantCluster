@@ -16,6 +16,7 @@
 #include "DivQuantHeader.h"
 
 #include <assert.h>
+#include <algorithm>
 
 #define L2_SQR( X1, Y1, Z1, X2, Y2, Z2 )\
 temp = ( X1 ) - ( X2 );\
