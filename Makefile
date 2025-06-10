@@ -12,7 +12,6 @@ CXXFLAGS=$(CFLAGS) -std=c++11
 
 INC_FLAGS=-Ilibpng -IDivQuant
 
-# Assumes zlib is available as a system library in std location
 LIBS=-lz -lpng
 
 DIVQUANT_OBJS=\
