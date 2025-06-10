@@ -14,6 +14,10 @@
 
 using namespace std;
 
+namespace {
+  uint32_t g_numClusters = 16;
+};
+
 // Scan input values to make sure there are no duplicate pixels
 
 #if defined(DEBUG)
@@ -269,7 +273,7 @@ void process_file(PngContext *cxt)
   printf("found %d unique pixels in input image\n", (int)allSortedUniquePixels.size());
   
   int numPixels = (int) allSortedUniquePixels.size();
-  uint32_t numClusters = 256;
+  uint32_t numClusters = g_numClusters;
   
   uint32_t *inUniquePixels = new uint32_t[numPixels];
   uint32_t *outUniquePixels = new uint32_t[numPixels];
@@ -628,12 +632,19 @@ void cleanup(PngContext *cxt)
 }
 
 int main(int argc, char **argv) {
-  if (argc != 2) {
-    fprintf(stderr, "usage divquantcluster PNG\n");
+  if (argc != 3) {
+    fprintf(stderr, "usage divquantcluster PNG numcolors\n");
     exit(1);
   }
   PngContext cxt;
   read_png_file(argv[1], &cxt);
+
+  g_numClusters = atoi(argv[2]);
+
+  if (g_numClusters == 0) {
+    fprintf(stderr, "Invalid cluster count: '%s'\n", argv[2]);
+    exit(1);
+  }
   
   if ((0)) {
     // Write input data just read back out to a PNG image to make sure read/write logic
